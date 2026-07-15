@@ -1,0 +1,26 @@
+// Схема базы данных для гостей Мерейтой
+// Используем PostgreSQL (Render Postgres / Neon)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RsvpStatus {
+  COMING          // Әрине келемін
+  COMING_WITH_SPOUSE // Жұбайыммен келемін
+  NOT_COMING      // Келе алмаймын
+}
+
+model Guest {
+  id        String     @id @default(cuid())
+  fullName  String     // Аты-жөні (может включать пару, если пришли вдвоём)
+  status    RsvpStatus
+  createdAt DateTime   @default(now())
+
+  @@map("guests")
+}
