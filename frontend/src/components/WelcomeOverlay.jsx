@@ -4,7 +4,7 @@ import { useLanguage } from "../i18n/LanguageContext.jsx";
 import Divider from "./Divider.jsx";
 
 export default function WelcomeOverlay({ visible, onOpen }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <AnimatePresence>
@@ -41,6 +41,15 @@ export default function WelcomeOverlay({ visible, onOpen }) {
             className="font-script italic text-4xl text-ink mt-2"
           >
             {EVENT.personName}
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="font-body text-xs tracking-wider text-ink/60 mt-3"
+          >
+            {EVENT.secondaryEvent.personName} — {EVENT.secondaryEvent.label[language]}
           </motion.p>
 
           <Divider />

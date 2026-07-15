@@ -33,6 +33,10 @@ export default function Hero() {
 
         <p className="font-script italic text-5xl text-ink mt-2">{EVENT.personName}</p>
 
+        <p className="font-body text-xs tracking-wider text-ink/60 mt-3">
+          {EVENT.secondaryEvent.personName} — {EVENT.secondaryEvent.label[language]}
+        </p>
+
         <Divider />
 
         <p className="font-body text-sm tracking-wider text-ink/80">
