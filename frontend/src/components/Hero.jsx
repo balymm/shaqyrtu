@@ -11,8 +11,11 @@ export default function Hero() {
     <section className="relative min-h-[100svh] flex flex-col items-center justify-end overflow-hidden">
       {/* Фоновое фото — замените /public/hero.jpg на своё */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${EVENT.heroImageSrc})` }}
+        className="absolute inset-0 bg-cover"
+        style={{
+          backgroundImage: `url(${EVENT.heroImageSrc})`,
+          backgroundPosition: "70% 30%",
+        }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/5 to-cream" />
 
