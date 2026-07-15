@@ -3,7 +3,7 @@ services:
     name: mereitoi-backend
     runtime: node
     plan: free
-    buildCommand: npm install && npx prisma migrate deploy
+    buildCommand: npm install && npx prisma db push --accept-data-loss
     startCommand: npm start
     envVars:
       - key: DATABASE_URL
