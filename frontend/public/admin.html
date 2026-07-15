@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Гости — Мерейтой</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; background: #FBF6EC; color: #3B342A; }
+  h1 { font-size: 20px; }
+  input, button { font-size: 16px; padding: 10px 14px; border-radius: 8px; border: 1px solid #ccc; }
+  input { width: 260px; }
+  button { background: #B8944F; color: white; border: none; cursor: pointer; margin-left: 8px; }
+  button:hover { opacity: 0.9; }
+  #summary { margin: 20px 0; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; background: white; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #eee; font-size: 14px; }
+  th { background: #f3ece0; }
+  .status-COMING { color: #2a7a2a; }
+  .status-COMING_WITH_SPOUSE { color: #2a5a9a; }
+  .status-NOT_COMING { color: #a02a2a; }
+  #error { color: #a02a2a; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <h1>Список гостей</h1>
+  <div>
+    <input id="key" type="password" placeholder="ADMIN_KEY" />
+    <button onclick="load()">Показать</button>
+  </div>
+  <div id="error"></div>
+  <div id="summary"></div>
+  <table id="table" style="display:none">
+    <thead><tr><th>Имя</th><th>Статус</th><th>Дата</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+<script>
+  // Впишите сюда URL вашего backend на Render
+  const API_BASE_URL = "https://mereitoi-backend.onrender.com";
+
+  const STATUS_LABELS = {
+    COMING: "Придёт",
+    COMING_WITH_SPOUSE: "Придёт с супругом(ой)",
+    NOT_COMING: "Не придёт",
+  };
+
+  async function load() {
+    const key = document.getElementById("key").value.trim();
+    const errorEl = document.getElementById("error");
+    const summaryEl = document.getElementById("summary");
+    const table = document.getElementById("table");
+    const rows = document.getElementById("rows");
+    errorEl.textContent = "";
+    summaryEl.textContent = "Загрузка…";
+    table.style.display = "none";
+
+    if (!key) {
+      errorEl.textContent = "Введите ключ";
+      summaryEl.textContent = "";
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/rsvp`, {
+        headers: { "x-admin-key": key },
+      });
+
+      if (res.status === 401) {
+        errorEl.textContent = "Неверный ключ";
+        summaryEl.textContent = "";
+        return;
+      }
+      if (!res.ok) {
+        throw new Error("Ошибка сервера: " + res.status);
+      }
+
+      const data = await res.json();
+      const s = data.summary;
+      summaryEl.textContent =
+        `Всего: ${s.total} · Придут: ${s.coming} · С супругом: ${s.comingWithSpouse} · Не придут: ${s.notComing}`;
+
+      rows.innerHTML = "";
+      data.guests.forEach((g) => {
+        const tr = document.createElement("tr");
+        const date = new Date(g.createdAt).toLocaleString("ru-RU");
+        tr.innerHTML = `
+          <td>${g.fullName}</td>
+          <td class="status-${g.status}">${STATUS_LABELS[g.status] || g.status}</td>
+          <td>${date}</td>
+        `;
+        rows.appendChild(tr);
+      });
+      table.style.display = "table";
+    } catch (err) {
+      errorEl.textContent = "Не удалось загрузить: " + err.message;
+      summaryEl.textContent = "";
+    }
+  }
+</script>
+</body>
+</html>
