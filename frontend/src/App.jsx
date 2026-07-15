@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
 import { EVENT } from "./eventConfig.js";
+import { useLanguage } from "./i18n/LanguageContext.jsx";
+import { getMonthLabel, getDay, getYear } from "./i18n/dateFormat.js";
 import WelcomeOverlay from "./components/WelcomeOverlay.jsx";
 import MusicPlayer from "./components/MusicPlayer.jsx";
+import LanguageSwitcher from "./components/LanguageSwitcher.jsx";
 import Hero from "./components/Hero.jsx";
 import InvitationText from "./components/InvitationText.jsx";
 import EventCalendar from "./components/EventCalendar.jsx";
@@ -10,6 +13,7 @@ import RSVPForm from "./components/RSVPForm.jsx";
 import Countdown from "./components/Countdown.jsx";
 
 export default function App() {
+  const { language } = useLanguage();
   const audioRef = useRef(null);
   const [overlayVisible, setOverlayVisible] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -44,6 +48,7 @@ export default function App() {
       <audio ref={audioRef} src={EVENT.musicSrc} loop preload="none" />
 
       <WelcomeOverlay visible={overlayVisible} onOpen={handleOpen} />
+      <LanguageSwitcher />
       <MusicPlayer isPlaying={isPlaying} onToggle={toggleMusic} />
 
       <main>
@@ -56,7 +61,8 @@ export default function App() {
       </main>
 
       <footer className="text-center py-8 font-body text-[0.65rem] tracking-widest uppercase text-ink/40">
-        {EVENT.monthLabel} {EVENT.eventDay}, {EVENT.monthYear}
+        {getMonthLabel(EVENT.eventDateISO, language)} {getDay(EVENT.eventDateISO)},{" "}
+        {getYear(EVENT.eventDateISO)}
       </footer>
     </div>
   );

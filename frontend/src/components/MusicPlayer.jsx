@@ -1,9 +1,13 @@
+import { useLanguage } from "../i18n/LanguageContext.jsx";
+
 export default function MusicPlayer({ isPlaying, onToggle }) {
+  const { t } = useLanguage();
+
   return (
     <button
       type="button"
       onClick={onToggle}
-      aria-label={isPlaying ? "Музыканы тоқтату" : "Музыканы қосу"}
+      aria-label={isPlaying ? t.musicOn : t.musicOff}
       aria-pressed={isPlaying}
       className="fixed top-4 right-4 z-40 h-14 w-14 rounded-full glass-card shadow-soft
                  flex items-center justify-center text-gold-dark active:scale-95 transition-transform"

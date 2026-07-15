@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import { EVENT } from "../eventConfig.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
+import { getMonthLabel, getDay, getYear, getTimeLabel } from "../i18n/dateFormat.js";
 import Divider from "./Divider.jsx";
 
 export default function Hero() {
+  const { language, t } = useLanguage();
+
   return (
     <section className="relative min-h-[100svh] flex flex-col items-center justify-end overflow-hidden">
       {/* Фоновое фото — замените /public/hero.jpg на своё */}
@@ -19,17 +23,18 @@ export default function Hero() {
         className="relative z-10 w-full glass-card rounded-t-[2.5rem] px-6 pt-10 pb-12 text-center shadow-soft"
       >
         <span className="font-body tracking-[0.35em] text-[0.65rem] text-gold-dark uppercase">
-          Мерейтой
+          {t.topLabel}
         </span>
 
         <h1 className="font-display text-7xl text-gold-dark mt-3">{EVENT.age}</h1>
 
-        <p className="font-script text-5xl text-ink mt-2">{EVENT.personName}</p>
+        <p className="font-script italic text-5xl text-ink mt-2">{EVENT.personName}</p>
 
         <Divider />
 
         <p className="font-body text-sm tracking-wider text-ink/80">
-          {EVENT.monthLabel} {EVENT.eventDay}, {EVENT.monthYear} · {EVENT.timeLabel}
+          {getMonthLabel(EVENT.eventDateISO, language)} {getDay(EVENT.eventDateISO)},{" "}
+          {getYear(EVENT.eventDateISO)} · {getTimeLabel(EVENT.eventDateISO)}
         </p>
       </motion.div>
     </section>

@@ -16,7 +16,7 @@ export default {
       },
       fontFamily: {
         display: ["'Playfair Display'", "serif"],
-        script: ["'Great Vibes'", "cursive"],
+        script: ["'Playfair Display'", "serif"],
         body: ["'Montserrat'", "sans-serif"],
       },
       boxShadow: {

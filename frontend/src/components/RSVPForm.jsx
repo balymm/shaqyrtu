@@ -2,29 +2,31 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Divider from "./Divider.jsx";
 import { submitRsvp } from "../lib/api.js";
-
-const OPTIONS = [
-  { value: "COMING", label: "Әрине келемін" },
-  { value: "COMING_WITH_SPOUSE", label: "Жұбайыммен келемін" },
-  { value: "NOT_COMING", label: "Келе алмаймын" },
-];
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function RSVPForm() {
+  const { t } = useLanguage();
   const [fullName, setFullName] = useState("");
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [state, setState] = useState("idle"); // idle | loading | success
+
+  const OPTIONS = [
+    { value: "COMING", label: t.rsvpOptionComing },
+    { value: "COMING_WITH_SPOUSE", label: t.rsvpOptionComingWithSpouse },
+    { value: "NOT_COMING", label: t.rsvpOptionNotComing },
+  ];
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
 
     if (fullName.trim().length < 2) {
-      setError("Аты-жөніңізді толық енгізіңіз");
+      setError(t.rsvpErrorName);
       return;
     }
     if (!status) {
-      setError("Жауап түрін таңдаңыз");
+      setError(t.rsvpErrorStatus);
       return;
     }
 
@@ -33,7 +35,7 @@ export default function RSVPForm() {
       await submitRsvp({ fullName, status });
       setState("success");
     } catch (err) {
-      setError(err.message || "Қате шықты, қайталап көріңіз");
+      setError(err.message || t.rsvpErrorGeneric);
       setState("idle");
     }
   }
@@ -47,8 +49,8 @@ export default function RSVPForm() {
         transition={{ duration: 0.7 }}
         className="glass-card rounded-3xl shadow-soft mx-auto max-w-sm px-6 py-8"
       >
-        <h3 className="font-script text-4xl text-gold-dark text-center">
-          Тойға қатысуыңызды растаңыз
+        <h3 className="font-script italic text-4xl text-gold-dark text-center">
+          {t.rsvpHeading}
         </h3>
         <Divider />
 
@@ -72,9 +74,7 @@ export default function RSVPForm() {
                   />
                 </svg>
               </div>
-              <p className="font-body text-sm text-ink/80">
-                Рахмет! Жауабыңыз қабылданды.
-              </p>
+              <p className="font-body text-sm text-ink/80">{t.rsvpSuccessMsg}</p>
             </motion.div>
           ) : (
             <motion.form
@@ -89,16 +89,14 @@ export default function RSVPForm() {
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Аты-жөніңіз"
+                placeholder={t.rsvpNamePlaceholder}
                 maxLength={120}
                 className="w-full rounded-full border border-line bg-ivory px-5 py-3.5
-                           font-script text-xl text-ink placeholder:text-ink/40 outline-none
+                           font-script italic text-xl text-ink placeholder:text-ink/40 outline-none
                            focus:border-gold transition-colors"
               />
 
-              <p className="font-body text-xs leading-relaxed text-ink/60">
-                Жұбайыңызбен келсеңіз, есімдеріңізді бірге жаза кетіңіз
-              </p>
+              <p className="font-body text-xs leading-relaxed text-ink/60">{t.rsvpSpouseNote}</p>
 
               <div className="space-y-3">
                 {OPTIONS.map((opt) => (
@@ -128,10 +126,10 @@ export default function RSVPForm() {
               <button
                 type="submit"
                 disabled={state === "loading"}
-                className="w-full rounded-full bg-gold-dark text-ivory font-script text-2xl
+                className="w-full rounded-full bg-gold-dark text-ivory font-script italic text-2xl
                            py-3 active:scale-95 transition-transform disabled:opacity-60"
               >
-                {state === "loading" ? "Жіберілуде…" : "Жауапты жіберу"}
+                {state === "loading" ? t.rsvpSubmitting : t.rsvpSubmit}
               </button>
             </motion.form>
           )}

@@ -1,8 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { EVENT } from "../eventConfig.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 import Divider from "./Divider.jsx";
 
 export default function WelcomeOverlay({ visible, onOpen }) {
+  const { t } = useLanguage();
+
   return (
     <AnimatePresence>
       {visible && (
@@ -19,7 +22,7 @@ export default function WelcomeOverlay({ visible, onOpen }) {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="font-body tracking-[0.35em] text-xs text-gold-dark uppercase"
           >
-            Мерейтойға шақыру
+            {t.welcomeLabel}
           </motion.span>
 
           <motion.h1
@@ -35,7 +38,7 @@ export default function WelcomeOverlay({ visible, onOpen }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.6 }}
-            className="font-script text-4xl text-ink mt-2"
+            className="font-script italic text-4xl text-ink mt-2"
           >
             {EVENT.personName}
           </motion.p>
@@ -51,7 +54,7 @@ export default function WelcomeOverlay({ visible, onOpen }) {
             className="mt-8 rounded-full border border-gold px-8 py-3 font-body text-sm
                        tracking-widest uppercase text-gold-dark active:scale-95 transition-transform"
           >
-            Шақыруды ашу
+            {t.openInvitation}
           </motion.button>
         </motion.div>
       )}

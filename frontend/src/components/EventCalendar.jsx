@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { EVENT } from "../eventConfig.js";
-
-const WEEKDAYS_KK = ["ДС", "СС", "СР", "БС", "ЖМ", "СБ", "ЖС"];
+import { useLanguage } from "../i18n/LanguageContext.jsx";
+import { getMonthLabel, getYear, getDay, getWeekdayLabels, getTimeLabel } from "../i18n/dateFormat.js";
 
 function buildMonthGrid(dateISO) {
   const date = new Date(dateISO);
@@ -11,7 +11,7 @@ function buildMonthGrid(dateISO) {
   const firstDay = new Date(year, month, 1);
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  // JS: 0=Sunday..6=Saturday. Переводим так, чтобы неделя начиналась с понедельника (ДС).
+  // JS: 0=Sunday..6=Saturday. Переводим так, чтобы неделя начиналась с понедельника.
   const jsWeekday = firstDay.getDay();
   const leadingBlanks = (jsWeekday + 6) % 7;
 
@@ -22,7 +22,10 @@ function buildMonthGrid(dateISO) {
 }
 
 export default function EventCalendar() {
+  const { language, t } = useLanguage();
   const cells = buildMonthGrid(EVENT.eventDateISO);
+  const eventDay = getDay(EVENT.eventDateISO);
+  const weekdays = getWeekdayLabels(language);
 
   return (
     <section className="px-6 py-10 bg-cream">
@@ -34,12 +37,16 @@ export default function EventCalendar() {
         className="glass-card rounded-3xl shadow-soft mx-auto max-w-sm px-5 py-7"
       >
         <div className="flex items-baseline justify-between border-b border-line pb-3 mb-4">
-          <span className="font-display text-2xl text-ink">{EVENT.monthLabel}</span>
-          <span className="font-display text-2xl text-gold-dark">{EVENT.monthYear}</span>
+          <span className="font-display text-2xl text-ink">
+            {getMonthLabel(EVENT.eventDateISO, language)}
+          </span>
+          <span className="font-display text-2xl text-gold-dark">
+            {getYear(EVENT.eventDateISO)}
+          </span>
         </div>
 
         <div className="grid grid-cols-7 gap-y-3 text-center">
-          {WEEKDAYS_KK.map((day) => (
+          {weekdays.map((day) => (
             <span key={day} className="font-body text-[0.65rem] tracking-wider text-ink/50">
               {day}
             </span>
@@ -50,7 +57,7 @@ export default function EventCalendar() {
               {day && (
                 <>
                   <span className="font-display text-lg text-ink z-10">{day}</span>
-                  {day === EVENT.eventDay && (
+                  {day === eventDay && (
                     <svg
                       className="absolute h-10 w-10 text-gold"
                       viewBox="0 0 40 40"
@@ -71,10 +78,10 @@ export default function EventCalendar() {
         </div>
 
         <p className="text-center font-body text-xs tracking-widest uppercase text-ink/60 mt-6">
-          Басталу уақыты
+          {t.calendarStartTimeLabel}
         </p>
-        <p className="text-center font-script text-4xl text-gold-dark mt-1">
-          {EVENT.timeLabel}
+        <p className="text-center font-script italic text-4xl text-gold-dark mt-1">
+          {getTimeLabel(EVENT.eventDateISO)}
         </p>
       </motion.div>
     </section>

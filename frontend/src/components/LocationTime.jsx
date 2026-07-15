@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { EVENT } from "../eventConfig.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 import Divider from "./Divider.jsx";
 
 export default function LocationTime() {
+  const { language, t } = useLanguage();
+
   return (
     <section className="px-6 py-10 bg-cream">
       <motion.div
@@ -12,16 +15,16 @@ export default function LocationTime() {
         transition={{ duration: 0.7 }}
         className="glass-card rounded-3xl shadow-soft mx-auto max-w-sm px-6 py-8 text-center"
       >
-        <h3 className="font-script text-4xl text-gold-dark">Мекен-жайы</h3>
+        <h3 className="font-script italic text-4xl text-gold-dark">{t.locationHeading}</h3>
         <Divider />
 
         <p className="font-body text-sm text-ink/80 leading-relaxed">
-          {EVENT.venueCity}
+          {EVENT.venueCity[language]}
           <br />
-          {EVENT.venueAddress}
+          {EVENT.venueAddress[language]}
         </p>
 
-        <p className="font-script text-3xl text-ink mt-4">{EVENT.venueName}</p>
+        <p className="font-script italic text-3xl text-ink mt-4">{EVENT.venueName[language]}</p>
 
         <a
           href={EVENT.mapUrl}
@@ -30,7 +33,7 @@ export default function LocationTime() {
           className="inline-block mt-6 w-full rounded-full bg-gold-dark text-ivory
                      font-body text-xs tracking-widest uppercase py-3.5 active:scale-95 transition-transform"
         >
-          2GIS картасына өту
+          {t.mapButtonLabel}
         </a>
       </motion.div>
     </section>

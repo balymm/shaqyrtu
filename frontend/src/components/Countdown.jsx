@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { EVENT } from "../eventConfig.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 function getTimeLeft() {
   const total = new Date(EVENT.eventDateISO).getTime() - Date.now();
@@ -29,6 +30,7 @@ function TimeUnit({ value, label }) {
 }
 
 export default function Countdown() {
+  const { t } = useLanguage();
   const [time, setTime] = useState(getTimeLeft());
 
   useEffect(() => {
@@ -45,16 +47,16 @@ export default function Countdown() {
         transition={{ duration: 0.7 }}
         className="glass-card rounded-3xl shadow-soft mx-auto max-w-sm px-6 py-8 text-center"
       >
-        <h3 className="font-script text-4xl text-gold-dark">Тойға дейін</h3>
+        <h3 className="font-script italic text-4xl text-gold-dark">{t.countdownHeading}</h3>
 
         {time.isOver ? (
-          <p className="font-body text-sm text-ink/70 mt-4">Мерейтой басталды!</p>
+          <p className="font-body text-sm text-ink/70 mt-4">{t.countdownOver}</p>
         ) : (
           <div className="flex items-center justify-center gap-3 mt-6">
-            <TimeUnit value={time.days} label="Күн" />
-            <TimeUnit value={time.hours} label="Сағат" />
-            <TimeUnit value={time.minutes} label="Минут" />
-            <TimeUnit value={time.seconds} label="Секунд" />
+            <TimeUnit value={time.days} label={t.unitDays} />
+            <TimeUnit value={time.hours} label={t.unitHours} />
+            <TimeUnit value={time.minutes} label={t.unitMinutes} />
+            <TimeUnit value={time.seconds} label={t.unitSeconds} />
           </div>
         )}
       </motion.div>
