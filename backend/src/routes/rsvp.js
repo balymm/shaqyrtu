@@ -11,10 +11,10 @@ router.post("/", async (req, res) => {
     const { fullName, status } = req.body ?? {};
 
     if (typeof fullName !== "string" || fullName.trim().length < 2) {
-      return res.status(400).json({ error: "Аты-жөніңізді толық енгізіңіз" });
+      return res.status(400).json({ code: "INVALID_NAME", error: "Аты-жөніңізді толық енгізіңіз" });
     }
     if (!VALID_STATUSES.includes(status)) {
-      return res.status(400).json({ error: "Жауап түрін таңдаңыз" });
+      return res.status(400).json({ code: "INVALID_STATUS", error: "Жауап түрін таңдаңыз" });
     }
 
     const guest = await prisma.guest.create({
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     return res.status(201).json({ ok: true, guest });
   } catch (err) {
     console.error("POST /api/rsvp error:", err);
-    return res.status(500).json({ error: "Серверде қате шықты, кейінірек қайталап көріңіз" });
+    return res.status(500).json({ code: "SERVER_ERROR", error: "Серверде қате шықты, кейінірек қайталап көріңіз" });
   }
 });
 

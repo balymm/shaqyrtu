@@ -35,7 +35,12 @@ export default function RSVPForm() {
       await submitRsvp({ fullName, status });
       setState("success");
     } catch (err) {
-      setError(err.message || t.rsvpErrorGeneric);
+      const ERROR_MESSAGES = {
+        INVALID_NAME: t.rsvpErrorName,
+        INVALID_STATUS: t.rsvpErrorStatus,
+        SERVER_ERROR: t.rsvpErrorGeneric,
+      };
+      setError(ERROR_MESSAGES[err.code] || t.rsvpErrorGeneric);
       setState("idle");
     }
   }

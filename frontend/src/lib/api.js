@@ -10,7 +10,9 @@ export async function submitRsvp({ fullName, status }) {
   const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
-    throw new Error(data?.error || "Жауапты жіберу кезінде қате шықты");
+    const err = new Error(data?.error || "request_failed");
+    err.code = data?.code || "SERVER_ERROR";
+    throw err;
   }
 
   return data;
