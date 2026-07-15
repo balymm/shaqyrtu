@@ -40,7 +40,7 @@ export default function WelcomeOverlay({ visible, onOpen }) {
             transition={{ delay: 0.45, duration: 0.6 }}
             className="font-script italic text-4xl text-ink mt-2"
           >
-            {EVENT.personName}
+            {EVENT.personName[language]}
           </motion.p>
 
           <motion.p
@@ -49,7 +49,7 @@ export default function WelcomeOverlay({ visible, onOpen }) {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="font-body text-xs tracking-wider text-ink/60 mt-3"
           >
-            {EVENT.secondaryEvent.personName} — {EVENT.secondaryEvent.label[language]}
+            {EVENT.secondaryEvent.personName[language]} — {EVENT.secondaryEvent.label[language]}
           </motion.p>
 
           <Divider />

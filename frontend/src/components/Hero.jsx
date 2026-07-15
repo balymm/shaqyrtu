@@ -31,10 +31,10 @@ export default function Hero() {
 
         <h1 className="font-display text-7xl text-gold-dark mt-3">{EVENT.age}</h1>
 
-        <p className="font-script italic text-5xl text-ink mt-2">{EVENT.personName}</p>
+        <p className="font-script italic text-5xl text-ink mt-2">{EVENT.personName[language]}</p>
 
         <p className="font-body text-xs tracking-wider text-ink/60 mt-3">
-          {EVENT.secondaryEvent.personName} — {EVENT.secondaryEvent.label[language]}
+          {EVENT.secondaryEvent.personName[language]} — {EVENT.secondaryEvent.label[language]}
         </p>
 
         <Divider />
