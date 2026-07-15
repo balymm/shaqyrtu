@@ -29,9 +29,9 @@ export const EVENT = {
     tr: "«Şañyrak» Restoranı",
   },
   venueCity: {
-    kk: "Алматы қаласы",
-    ru: "г. Алматы",
-    tr: "Almatı şehri",
+    kk: "Қарағанды қаласы",
+    ru: "г. Караганда",
+    tr: "Qaragandy şehri",
   },
   venueAddress: {
     kk: "Әл-Фараби даңғылы, 15",
