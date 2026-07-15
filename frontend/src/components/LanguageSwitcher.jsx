@@ -6,7 +6,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div
-      className="fixed top-4 left-4 z-40 glass-card rounded-full shadow-soft flex p-1 gap-0.5"
+      className="fixed top-4 left-4 z-[60] glass-card rounded-full shadow-soft flex p-1 gap-0.5"
       role="group"
       aria-label="Тіл / Язык / Dil"
     >
