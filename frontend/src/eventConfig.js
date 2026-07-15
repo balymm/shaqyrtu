@@ -40,9 +40,9 @@ export const EVENT = {
   eventDateISO: "2027-01-09T15:00:00+05:00",
 
   venueName: {
-    kk: "«Шаңырақ» мейрамханасы",
-    ru: "Ресторан «Шанырак»",
-    tr: "«Şañyrak» Restoranı",
+    kk: "«Джихан» мейрамханасы",
+    ru: "Ресторан «Джихан»",
+    tr: "«Jihan» Restoranı",
   },
   venueCity: {
     kk: "Қарағанды қаласы",
@@ -50,9 +50,9 @@ export const EVENT = {
     tr: "Qaragandy şehri",
   },
   venueAddress: {
-    kk: "Әл-Фараби даңғылы, 15",
-    ru: "проспект Аль-Фараби, 15",
-    tr: "Al-Farabi Bulvarı, 15",
+    kk: "30-шы квартал, 24",
+    ru: "30-й квартал, 24",
+    tr: "30. Mahalle, 24",
   },
 
   mapUrl: "https://2gis.kz/almaty",
