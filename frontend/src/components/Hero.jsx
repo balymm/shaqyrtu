@@ -27,11 +27,11 @@ export default function Hero() {
       <div className="absolute inset-0">
         <AnimatePresence mode="sync">
           <motion.div
-            key={images[slideIndex]}
+            key={images[slideIndex].src}
             className="absolute inset-0 bg-cover"
             style={{
-              backgroundImage: `url(${images[slideIndex]})`,
-              backgroundPosition: "70% 30%",
+              backgroundImage: `url(${images[slideIndex].src})`,
+              backgroundPosition: images[slideIndex].position,
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
