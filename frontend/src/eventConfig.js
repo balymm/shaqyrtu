@@ -72,8 +72,10 @@ export const EVENT = {
   // Путь к аудиофайлу фоновой музыки (положите файл в /public/music.mp3)
   musicSrc: "/music.mp3",
 
-  // Путь к фоновому фото для Hero-секции (положите файл в /public/hero.jpg)
-  heroImageSrc: "/hero.jpg",
+  // Фото для слайд-шоу в Hero-секции — можно от 1 до сколько угодно штук.
+  // Положите файлы в /public/ с именами hero-1.jpg, hero-2.jpg, hero-3.jpg...
+  // и впишите их сюда в нужном порядке. Слайды меняются автоматически по кругу.
+  heroImages: ["/hero-1.jpg", "/hero-2.jpg", "/hero-3.jpg"],
 };
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";

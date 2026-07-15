@@ -47,7 +47,7 @@ export default function WelcomeOverlay({ visible, onOpen }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="font-body text-xs tracking-wider text-ink/60 mt-3"
+            className="font-script italic text-2xl text-ink/80 mt-3"
           >
             {EVENT.secondaryEvent.personName[language]} — {EVENT.secondaryEvent.label[language]}
           </motion.p>
