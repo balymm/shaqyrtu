@@ -2,6 +2,7 @@ services:
   - type: web
     name: mereitoi-backend
     runtime: node
+    rootDir: backend
     plan: free
     buildCommand: npm install && npx prisma db push --accept-data-loss
     startCommand: npm start
