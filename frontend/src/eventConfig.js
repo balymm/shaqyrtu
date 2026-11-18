@@ -42,7 +42,7 @@ export const EVENT = {
   venueName: {
     kk: "«Шаңырақ» мейрамханасы",
     ru: "Ресторан «Шаңырақ»",
-    "«Shanyraq» Restoranı",
+    tr: "«Shanyraq» Restoranı",
     
   },
   venueCity: {
