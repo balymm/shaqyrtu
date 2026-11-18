@@ -40,9 +40,10 @@ export const EVENT = {
   eventDateISO: "2027-01-09T15:00:00+05:00",
 
   venueName: {
-    kk: "«Джихан» мейрамханасы",
-    ru: "Ресторан «Джихан»",
-    tr: "«Jihan» Restoranı",
+    kk: "«Шаңырақ» мейрамханасы",
+    ru: "Ресторан «Шаңырақ»",
+    tr: "Shanyraq" Restoranı,
+    
   },
   venueCity: {
     kk: "Қарағанды қаласы",
