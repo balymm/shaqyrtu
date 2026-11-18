@@ -51,9 +51,9 @@ export const EVENT = {
     tr: "Qaragandy şehri",
   },
   venueAddress: {
-    kk: "30-шы квартал, 24",
-    ru: "30-й квартал, 24",
-    tr: "30. Mahalle, 24",
+    kk: "Бұқар жырау даңғылы, 111",
+    ru: "пр. Бухар-Жырау, 111",
+    tr: "Buhar Jırau Bulvarı, 111",
   },
 
   mapUrl: "https://go.2gis.com/JD2o2",
