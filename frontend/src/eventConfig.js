@@ -79,10 +79,14 @@ export const EVENT = {
   // фото "смотрит" при обрезке под размер экрана): "X% Y%", где X — левый край
   // (0%) → правый (100%), Y — верх (0%) → низ (100%). Подберите под то, где
   // на конкретном фото находится лицо/сюжет, который нужно всегда видеть.
-  heroImages: [
-    { src: "/hero-1.jpg", position: "75% 45%" },
-    { src: "/hero-2.jpg", position: "50% 55%" },
-    { src: "/hero-3.jpg", position: "45% 25%" },
+    heroImages: [
+    { src: "/hero-1.jpg", position: "50% 40%" },
+    { src: "/hero-2.jpg", position: "50% 40%" },
+    { src: "/hero-3.jpg", position: "75% 45%" },
+    { src: "/hero-4.jpg", position: "50% 35%" },
+    { src: "/hero-5.jpg", position: "50% 42%" },
+    { src: "/hero-6.jpg", position: "50% 40%" },
+    { src: "/hero-7.jpg", position: "75% 42%" },
   ],
 };
 
