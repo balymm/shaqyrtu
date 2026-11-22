@@ -12,6 +12,7 @@ export default function Hero() {
   const { language, t } = useLanguage();
   const images = EVENT.heroImages;
   const [slideIndex, setSlideIndex] = useState(0);
+  const image = images[slideIndex];
 
   useEffect(() => {
     if (images.length <= 1) return;
@@ -27,17 +28,38 @@ export default function Hero() {
       <div className="absolute inset-0">
         <AnimatePresence mode="sync">
           <motion.div
-            key={images[slideIndex].src}
-            className="absolute inset-0 bg-cover"
-            style={{
-              backgroundImage: `url(${images[slideIndex].src})`,
-              backgroundPosition: images[slideIndex].position,
-            }}
+            key={image.src}
+            className="absolute inset-0 overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
-          />
+          >
+            {image.fit === "contain" ? (
+              <>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 scale-110 bg-cover opacity-60 blur-xl"
+                  style={{
+                    backgroundImage: `url(${image.src})`,
+                    backgroundPosition: image.position,
+                  }}
+                />
+                <div
+                  className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${image.src})` }}
+                />
+              </>
+            ) : (
+              <div
+                className="absolute inset-0 bg-cover"
+                style={{
+                  backgroundImage: `url(${image.src})`,
+                  backgroundPosition: image.position,
+                }}
+              />
+            )}
+          </motion.div>
         </AnimatePresence>
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/5 to-cream" />
