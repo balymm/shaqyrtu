@@ -82,9 +82,9 @@ export const EVENT = {
     heroImages: [
     { src: "/hero-1.jpg", position: "50% 40%" },
     { src: "/hero-2.jpg", position: "50% 40%" },
-    { src: "/hero-3.jpg", position: "75% 45%" },
+    { src: "/hero-3.jpg", position: "100% 45%" },
     { src: "/hero-4.jpg", position: "50% 35%" },
-    { src: "/hero-5.jpg", position: "50% 42%" },
+    { src: "/hero-5.jpg", position: "50% 42%", fit: "contain" },
     { src: "/hero-6.jpg", position: "50% 40%" },
     { src: "/hero-7.jpg", position: "75% 42%" },
   ],
